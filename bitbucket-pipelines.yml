@@ -1,0 +1,11 @@
+pipelines:
+    default:
+      - step:
+          name: Sync GitHub Mirror
+          image: alpine/git:latest
+          clone:
+            enabled: false
+          script:
+            - git clone --mirror https://x-token-auth:"$Bitbucket_access_token"@bitbucket.org/solavise_tech/migrating_demo.git
+            - cd migrating_demo.git 
+            - git push --mirror https://x-token-auth:"$Github_access_token"@github.com/ampong0/migrating_demo.git
